@@ -2,10 +2,11 @@
 
 
 
-Network Working Group                                          C.A. Wood
-Internet-Draft                                                Cloudflare
-Intended status: Informational                          21 February 2021
-Expires: 25 August 2021
+Network Working Group                                         M. Thomson
+Internet-Draft                                                   Mozilla
+Intended status: Informational                                 C.A. Wood
+Expires: 25 August 2021                                       Cloudflare
+                                                        21 February 2021
 
 
                      Key Consistency and Discovery
@@ -76,7 +77,7 @@ Table of Contents
    6.  References
      6.1.  Normative References
      6.2.  Informative References
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -281,9 +282,9 @@ Table of Contents
               dprive-oblivious-doh-04.txt>.
 
    [OHTTP]    Thomson, M. and C. A. Wood, "Oblivious HTTP", Work in
-              Progress, Internet-Draft, draft-thomson-http-oblivious-00,
-              27 January 2021, <https://datatracker.ietf.org/doc/html/
-              draft-thomson-http-oblivious-00.txt>.
+              Progress, Internet-Draft, draft-thomson-http-oblivious-01,
+              21 February 2021, <https://datatracker.ietf.org/doc/html/
+              draft-thomson-http-oblivious-01.txt>.
 
    [PRIVACY-PASS]
               Celi, S., Davidson, A., and A. Faz-Hernandez, "Privacy
@@ -292,7 +293,13 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-
               privacypass-protocol-00.txt>.
 
-Author's Address
+Authors' Addresses
+
+   Martin Thomson
+   Mozilla
+
+   Email: mt@lowentropy.net
+
 
    Christopher A. Wood
    Cloudflare
