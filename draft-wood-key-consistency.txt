@@ -243,12 +243,6 @@ Table of Contents
 
 6.1.  Normative References
 
-   [I-D.thomson-http-oblivious]
-              Thomson, M. and C.A. Wood, "Oblivious HTTP", Work in
-              Progress, Internet-Draft, draft-ietf-http-oblivious-
-              latest, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              http-oblivious-latest.txt>.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -277,6 +271,12 @@ Table of Contents
               Draft, draft-pauly-dprive-oblivious-doh-04, 26 January
               2021, <https://datatracker.ietf.org/doc/html/draft-pauly-
               dprive-oblivious-doh-04.txt>.
+
+   [I-D.thomson-http-oblivious]
+              Thomson, M. and C.A. Wood, "Oblivious HTTP", Work in
+              Progress, Internet-Draft, draft-ietf-http-oblivious-
+              latest, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              http-oblivious-latest.txt>.
 
 Author's Address
 
