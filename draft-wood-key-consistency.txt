@@ -66,10 +66,11 @@ Table of Contents
      1.1.  Requirements
    2.  Core Requirements
    3.  Deploying Consistency and Correctness
-     3.1.  User-Driven Discovery
+     3.1.  Server-Provided Key Discovery
      3.2.  Proxy-Based Key Discovery
-     3.3.  Log-Based Discovery
-     3.4.  Anonymous System Discovery
+     3.3.  Log-Based Key Discovery
+     3.4.  Anonymous System Key Discovery
+     3.5.  Minimum Validity Periods
    4.  Future Work
    5.  Security Considerations
    6.  References
@@ -153,7 +154,7 @@ Table of Contents
    protocls in practice.  In all scenarios, the server corresponding to
    the desired key is considered malicious.
 
-3.1.  User-Driven Discovery
+3.1.  Server-Provided Key Discovery
 
    In this model, users would directly query servers for their
    corresponding public key.  The properties of this solution depend on
@@ -162,8 +163,11 @@ Table of Contents
    without detection.  External mechanisms to ensure consistency here
    might include, though are not limited to:
 
+   *  Presenting a signed assertion from a trusted entity that the key
+      is unique.
+
    *  Presenting proof that the key is present in some tamper-proof log,
-      similar to Certificate Transparency logs.
+      similar to Certificate Transparency ([RFC6962]) logs.
 
    *  User communication or gossip ensuring that all users have a shared
       view of the key.
@@ -191,22 +195,23 @@ Table of Contents
    Mitigating these risks may require tamper-proof logs as in
    Section 3.1.
 
-3.3.  Log-Based Discovery
+3.3.  Log-Based Key Discovery
 
    In this model, servers publish keys in a tamper-proof log similar to
-   that of Certificate Transparency.  Users may then fetch keys directly
-   from the server and subsequently verify their existence in the log.
-   The log is operated and audited in such a way that the contents of
-   the log are consistent for all users.  Any system which depends on
-   this type of system requires the log be autited or users have some
-   other mechanism for checking their view of the log state (gossiping).
-   However, this type of system does not ensure proactive security
-   against malicious servers unless log participants actively check log
-   proofs.  This requirement may impede deployment in practice, given
-   that no web browser checks SignedCertificateTimestamps before using
-   (accepting as valid) a corresponding TLS certificate.
+   that of Certificate Transparency [RFC6962].  Users may then fetch
+   keys directly from the server and subsequently verify their existence
+   in the log.  The log is operated and audited in such a way that the
+   contents of the log are consistent for all users.  Any system which
+   depends on this type of system requires the log be autited or users
+   have some other mechanism for checking their view of the log state
+   (gossiping).  However, this type of system does not ensure proactive
+   security against malicious servers unless log participants actively
+   check log proofs.  This requirement may impede deployment in
+   practice, given that no web browser checks
+   SignedCertificateTimestamps before using (accepting as valid) a
+   corresponding TLS certificate.
 
-3.4.  Anonymous System Discovery
+3.4.  Anonymous System Key Discovery
 
    In this model, users leverage an anonymity network such as Tor to
    fetch keys directly from servers over multiple vantage points.
@@ -216,6 +221,15 @@ Table of Contents
    of users of these anonymity networks increases.  However, beyond Tor,
    there does not exist a special-purpose anonymity network for this
    purpose.
+
+3.5.  Minimum Validity Periods
+
+   In addition to ensuring that there is one key at any time, or a
+   limited number keys, any system needs to ensure that a server cannot
+   rotate its keys too often in order to divide clients into smaller
+   groups based on when keys are acquired.  Setting a minimum validity
+   period limits the ability of a server to rotate keys, but also limits
+   the rate of key rotation.
 
 4.  Future Work
 
@@ -245,6 +259,10 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://datatracker.ietf.org/doc/html/rfc2119>.
+
+   [RFC6962]  Laurie, B., Langley, A., and E. Kasper, "Certificate
+              Transparency", RFC 6962, DOI 10.17487/RFC6962, June 2013,
+              <https://datatracker.ietf.org/doc/html/rfc6962>.
 
    [RFC7748]  Langley, A., Hamburg, M., and S. Turner, "Elliptic Curves
               for Security", RFC 7748, DOI 10.17487/RFC7748, January
