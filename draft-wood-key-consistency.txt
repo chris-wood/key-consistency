@@ -80,19 +80,17 @@ Table of Contents
 1.  Introduction
 
    Several proposed privacy-enhancing protocols such as Privacy Pass
-   [I-D.ietf-privacypass-protocol], Oblivious DoH
-   [I-D.pauly-dprive-oblivious-doh], and Oblivious HTTP
-   [I-D.thomson-http-oblivious] require clients to obtain and use a
-   public key for execution.  For example, Privacy Pass public keys are
-   used to privately obtain tokens for anonymous resumption.  Oblivious
-   DoH and HTTP both use public keys to encrypt messages to a particular
-   server.  In all cases, a common security goal is that recipients
-   cannot link usage of a public key to a specific (set of) user(s).  In
-   other words, all users of a public key should belong to the same
-   anonymity set, and an attacker should not be able to actively reduce
-   the size of this anonymity set.  Moreover, an attacker should not be
-   able to convince users to use a key that does not belong to the
-   intended server.
+   [PRIVACY-PASS], Oblivious DoH [ODOH], and Oblivious HTTP [OHTTP]
+   require clients to obtain and use a public key for execution.  For
+   example, Privacy Pass public keys are used to privately obtain tokens
+   for anonymous resumption.  Oblivious DoH and HTTP both use public
+   keys to encrypt messages to a particular server.  In all cases, a
+   common security goal is that recipients cannot link usage of a public
+   key to a specific (set of) user(s).  In other words, all users of a
+   public key should belong to the same anonymity set, and an attacker
+   should not be able to actively reduce the size of this anonymity set.
+   Moreover, an attacker should not be able to convince users to use a
+   key that does not belong to the intended server.
 
    In this document, we elaborate on these core requirements, and survey
    various system designs that might be used to satisfy them.  The
@@ -258,25 +256,23 @@ Table of Contents
 
 6.2.  Informative References
 
-   [I-D.ietf-privacypass-protocol]
-              Celi, S., Davidson, A., and A. Faz-Hernandez, "Privacy
-              Pass Protocol Specification", Work in Progress, Internet-
-              Draft, draft-ietf-privacypass-protocol-00, 5 January 2021,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-
-              privacypass-protocol-00.txt>.
-
-   [I-D.pauly-dprive-oblivious-doh]
-              Kinnear, E., McManus, P., Pauly, T., and C. A. Wood,
+   [ODOH]     Kinnear, E., McManus, P., Pauly, T., and C. A. Wood,
               "Oblivious DNS Over HTTPS", Work in Progress, Internet-
               Draft, draft-pauly-dprive-oblivious-doh-04, 26 January
               2021, <https://datatracker.ietf.org/doc/html/draft-pauly-
               dprive-oblivious-doh-04.txt>.
 
-   [I-D.thomson-http-oblivious]
-              Thomson, M. and C.A. Wood, "Oblivious HTTP", Work in
-              Progress, Internet-Draft, draft-ietf-http-oblivious-
-              latest, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              http-oblivious-latest.txt>.
+   [OHTTP]    Thomson, M. and C. A. Wood, "Oblivious HTTP", Work in
+              Progress, Internet-Draft, draft-thomson-http-oblivious-00,
+              27 January 2021, <https://datatracker.ietf.org/doc/html/
+              draft-thomson-http-oblivious-00.txt>.
+
+   [PRIVACY-PASS]
+              Celi, S., Davidson, A., and A. Faz-Hernandez, "Privacy
+              Pass Protocol Specification", Work in Progress, Internet-
+              Draft, draft-ietf-privacypass-protocol-00, 5 January 2021,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-
+              privacypass-protocol-00.txt>.
 
 Author's Address
 
