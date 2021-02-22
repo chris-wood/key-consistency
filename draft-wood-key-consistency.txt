@@ -5,8 +5,8 @@
 Network Working Group                                         M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Informational                                 C.A. Wood
-Expires: 25 August 2021                                       Cloudflare
-                                                        21 February 2021
+Expires: 26 August 2021                                       Cloudflare
+                                                        22 February 2021
 
 
                      Key Consistency and Discovery
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 August 2021.
+   This Internet-Draft will expire on 26 August 2021.
 
 Copyright Notice
 
@@ -246,7 +246,7 @@ Table of Contents
 
 5.  Security Considerations
 
-   This document discusses several mdoels that systems might use to
+   This document discusses several models that systems might use to
    implement public key discovery while ensuring key consistency and
    correctness.  It does not make any recommendations for such models as
    the best model depends on differing operational requirements and
@@ -277,9 +277,9 @@ Table of Contents
 
    [ODOH]     Kinnear, E., McManus, P., Pauly, T., and C. A. Wood,
               "Oblivious DNS Over HTTPS", Work in Progress, Internet-
-              Draft, draft-pauly-dprive-oblivious-doh-04, 26 January
+              Draft, draft-pauly-dprive-oblivious-doh-05, 21 February
               2021, <https://datatracker.ietf.org/doc/html/draft-pauly-
-              dprive-oblivious-doh-04.txt>.
+              dprive-oblivious-doh-05.txt>.
 
    [OHTTP]    Thomson, M. and C. A. Wood, "Oblivious HTTP", Work in
               Progress, Internet-Draft, draft-thomson-http-oblivious-01,
@@ -289,9 +289,9 @@ Table of Contents
    [PRIVACY-PASS]
               Celi, S., Davidson, A., and A. Faz-Hernandez, "Privacy
               Pass Protocol Specification", Work in Progress, Internet-
-              Draft, draft-ietf-privacypass-protocol-00, 5 January 2021,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-
-              privacypass-protocol-00.txt>.
+              Draft, draft-ietf-privacypass-protocol-01, 22 February
+              2021, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              privacypass-protocol-01.txt>.
 
 Authors' Addresses
 
