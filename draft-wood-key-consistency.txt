@@ -2,10 +2,12 @@
 
 
 
-Network Working Group                                         M. Thomson
-Internet-Draft                                                   Mozilla
-Intended status: Informational                                 C.A. Wood
-Expires: 26 August 2021                                       Cloudflare
+Network Working Group                                        A. Davidson
+Internet-Draft                                                LIP Lisboa
+Intended status: Informational                                M. Thomson
+Expires: 26 August 2021                                          Mozilla
+                                                               C.A. Wood
+                                                              Cloudflare
                                                         22 February 2021
 
 
@@ -84,15 +86,16 @@ Table of Contents
    Several proposed privacy-enhancing protocols such as Privacy Pass
    [PRIVACY-PASS], Oblivious DoH [ODOH], and Oblivious HTTP [OHTTP]
    require clients to obtain and use a public key for execution.  For
-   example, Privacy Pass public keys are used to privately obtain tokens
-   for anonymous resumption.  Oblivious DoH and HTTP both use public
-   keys to encrypt messages to a particular server.  In all cases, a
-   common security goal is that recipients cannot link usage of a public
-   key to a specific (set of) user(s).  In other words, all users of a
-   public key should belong to the same anonymity set, and an attacker
-   should not be able to actively reduce the size of this anonymity set.
-   Moreover, an attacker should not be able to convince users to use a
-   key that does not belong to the intended server.
+   example, Privacy Pass public keys are used by clients for validating
+   privately issued tokens for anonymous session resumption.  Oblivious
+   DoH and HTTP both use public keys to encrypt messages to a particular
+   server.  In all cases, a common security goal is that recipients
+   cannot link usage of a public key to a specific (set of) user(s).  In
+   other words, all users of a public key should belong to the same
+   anonymity set, and an attacker should not be able to actively reduce
+   the size of this anonymity set.  Moreover, an attacker should not be
+   able to convince users to use a key that does not belong to the
+   intended server.
 
    In this document, we elaborate on these core requirements, and survey
    various system designs that might be used to satisfy them.  The
@@ -120,7 +123,7 @@ Table of Contents
    compromise user privacy.
 
    An attacker may separately cause privacy problems by forcing an users
-   in ananonymity set to use an incorrect key.  Informally, a key is
+   in an anonymity set to use an incorrect key.  Informally, a key is
    correct if it belongs to the intended server and is not otherwise
    available to an attacker.  In a public key setting, this means that
    the public key is that which is owned by the corresponding owner, and
@@ -138,7 +141,7 @@ Table of Contents
    system fails.  Rotation must therefore be supported, and in doing so,
    users need some mechanism to ensure that rotated newly rotated keys
    are consistent and correct.  Operationally, servers rotating keys may
-   likely need to accommodate distribuetd system state synchronization
+   likely need to accommodate distributed system state-synchronization
    issues without sacrificing availability.  Some systems and protocols
    may choose to prioritize strong consistency over availability, but
    this document assumes that availability is preferred to consistency.
@@ -148,11 +151,11 @@ Table of Contents
    There are a variety of ways in systems may build systems for ensuring
    key consistency and correctness, ranging in operational complexity to
    ease-of-implementation.  In this section, we survey a number of
-   possible solutions.  The viaibility of each varies depending on the
+   possible solutions.  The viability of each varies depending on the
    applicable threat model, external dependencies, and overall system
    requirements.  We do not include the fixed public key model from
    Section 2, as this is likely not a viable solution for systems and
-   protocls in practice.  In all scenarios, the server corresponding to
+   protocols in practice.  In all scenarios, the server corresponding to
    the desired key is considered malicious.
 
 3.1.  Server-Provided Key Discovery
@@ -194,7 +197,7 @@ Table of Contents
       key.
 
    Mitigating these risks may require tamper-proof logs as in
-   Section 3.1.
+   Section 3.1, or via user gossip protocols.
 
 3.3.  Log-Based Key Discovery
 
@@ -203,7 +206,7 @@ Table of Contents
    keys directly from the server and subsequently verify their existence
    in the log.  The log is operated and audited in such a way that the
    contents of the log are consistent for all users.  Any system which
-   depends on this type of system requires the log be autited or users
+   depends on this type of system requires the log be audited or users
    have some other mechanism for checking their view of the log state
    (gossiping).  However, this type of system does not ensure proactive
    security against malicious servers unless log participants actively
@@ -228,9 +231,11 @@ Table of Contents
    In addition to ensuring that there is one key at any time, or a
    limited number keys, any system needs to ensure that a server cannot
    rotate its keys too often in order to divide clients into smaller
-   groups based on when keys are acquired.  Setting a minimum validity
-   period limits the ability of a server to rotate keys, but also limits
-   the rate of key rotation.
+   groups based on when keys are acquired.  Such considerations are
+   already highlighted within the Privacy Pass ecosystem, more
+   discussion can be found at [PRIVACY-PASS-ARCH].  Setting a minimum
+   validity period limits the ability of a server to rotate keys, but
+   also limits the rate of key rotation.
 
 4.  Future Work
 
@@ -293,7 +298,20 @@ Table of Contents
               2021, <https://datatracker.ietf.org/doc/html/draft-ietf-
               privacypass-protocol-01.txt>.
 
+   [PRIVACY-PASS-ARCH]
+              Davidson, A. and C. A. Wood, "Privacy Pass Architectural
+              Framework", Work in Progress, Internet-Draft, draft-ietf-
+              privacypass-architecture-01, 22 February 2021,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-
+              privacypass-architecture-01.txt>.
+
 Authors' Addresses
+
+   Alex Davidson
+   LIP Lisboa
+
+   Email: alex.davidson92@gmail.com
+
 
    Martin Thomson
    Mozilla

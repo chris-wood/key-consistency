@@ -5,6 +5,7 @@
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
 <title>Key Consistency and Discovery</title>
+<meta content="Alex Davidson" name="author">
 <meta content="Martin Thomson" name="author">
 <meta content="Christopher A. Wood" name="author">
 <meta content="
@@ -844,7 +845,7 @@ address div.right {
 <td class="right">February 2021</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Thomson &amp; Wood</td>
+<td class="left">Davidson, et al.</td>
 <td class="center">Expires 26 August 2021</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
@@ -866,6 +867,10 @@ address div.right {
 <dd class="expires"><time datetime="2021-08-26">26 August 2021</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
+<div class="author">
+      <div class="author-name">A. Davidson</div>
+<div class="org">LIP Lisboa</div>
+</div>
 <div class="author">
       <div class="author-name">M. Thomson</div>
 <div class="org">Mozilla</div>
@@ -1007,7 +1012,7 @@ of open problems in this area.<a href="#section-abstract-1" class="pilcrow">¶</
 <p id="section-1-1">Several proposed privacy-enhancing protocols such as Privacy Pass <span>[<a href="#PRIVACY-PASS" class="xref">PRIVACY-PASS</a>]</span>,
 Oblivious DoH <span>[<a href="#ODOH" class="xref">ODOH</a>]</span>, and Oblivious HTTP <span>[<a href="#OHTTP" class="xref">OHTTP</a>]</span>
 require clients to obtain and use a public key for execution. For example, Privacy Pass public keys
-are used to privately obtain tokens for anonymous resumption. Oblivious DoH and HTTP both use public
+are used by clients for validating privately issued tokens for anonymous session resumption. Oblivious DoH and HTTP both use public
 keys to encrypt messages to a particular server. In all cases, a common security goal is that recipients
 cannot link usage of a public key to a specific (set of) user(s). In other words, all users of a public
 key should belong to the same anonymity set, and an attacker should not be able to actively reduce the
@@ -1041,7 +1046,7 @@ same view of the key. Some protocols depend on large sets of users with consiste
 reasons. Specifically, all users with a consistent key represent an anonymity set wherein each user of
 the key in that set is indistinguishable from the rest. An attacker that can actively cause inconsistent
 views of keys can therefore compromise user privacy.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">An attacker may separately cause privacy problems by forcing an users in ananonymity set to use
+<p id="section-2-2">An attacker may separately cause privacy problems by forcing an users in an anonymity set to use
 an incorrect key. Informally, a key is correct if it belongs to the intended server and is not otherwise
 available to an attacker. In a public key setting, this means that the public key is that which
 is owned by the corresponding owner, and only that owner has access to the private key. An attacker
@@ -1053,7 +1058,7 @@ mechanics or controls to ensure that other users have a different key. However, 
 is not viable in practice. If the corresponding key is compromised, the system fails. Rotation must
 therefore be supported, and in doing so, users need some mechanism to ensure that rotated newly rotated
 keys are consistent and correct. Operationally, servers rotating keys may likely need to accommodate
-distribuetd system state synchronization issues without sacrificing availability. Some systems and protocols
+distributed system state-synchronization issues without sacrificing availability. Some systems and protocols
 may choose to prioritize strong consistency over availability, but this document assumes that availability
 is preferred to consistency.<a href="#section-2-3" class="pilcrow">¶</a></p>
 </section>
@@ -1065,9 +1070,9 @@ is preferred to consistency.<a href="#section-2-3" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-3-1">There are a variety of ways in systems may build systems for ensuring key consistency and correctness,
 ranging in operational complexity to ease-of-implementation. In this section, we survey a number of
-possible solutions. The viaibility of each varies depending on the applicable threat model, external
+possible solutions. The viability of each varies depending on the applicable threat model, external
 dependencies, and overall system requirements. We do not include the fixed public key model from
-<a href="#reqs" class="xref">Section 2</a>, as this is likely not a viable solution for systems and protocls in practice. In all scenarios,
+<a href="#reqs" class="xref">Section 2</a>, as this is likely not a viable solution for systems and protocols in practice. In all scenarios,
 the server corresponding to the desired key is considered malicious.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="server-based">
 <section id="section-3.1">
@@ -1106,7 +1111,7 @@ view of the server key. However, if this proxy is not trusted, operational risks
 key or retroactively use this key to compromise user privacy when users later make use of the key.<a href="#section-3.2-2.2" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-3.2-3">Mitigating these risks may require tamper-proof logs as in <a href="#server-based" class="xref">Section 3.1</a>.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">Mitigating these risks may require tamper-proof logs as in <a href="#server-based" class="xref">Section 3.1</a>, or via user gossip protocols.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="log-based">
@@ -1117,7 +1122,7 @@ key or retroactively use this key to compromise user privacy when users later ma
 <p id="section-3.3-1">In this model, servers publish keys in a tamper-proof log similar to that of Certificate Transparency <span>[<a href="#RFC6962" class="xref">RFC6962</a>]</span>.
 Users may then fetch keys directly from the server and subsequently verify their existence in the log.
 The log is operated and audited in such a way that the contents of the log are consistent for all users.
-Any system which depends on this type of system requires the log be autited or users have some other
+Any system which depends on this type of system requires the log be audited or users have some other
 mechanism for checking their view of the log state (gossiping). However, this type of system does not
 ensure proactive security against malicious servers unless log participants actively check log proofs.
 This requirement may impede deployment in practice, given that no web browser checks
@@ -1143,8 +1148,9 @@ Tor, there does not exist a special-purpose anonymity network for this purpose.<
         </h3>
 <p id="section-3.5-1">In addition to ensuring that there is one key at any time, or a limited number keys, any system
 needs to ensure that a server cannot rotate its keys too often in order to divide clients into
-smaller groups based on when keys are acquired.  Setting a minimum validity period limits the
-ability of a server to rotate keys, but also limits the rate of key rotation.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+smaller groups based on when keys are acquired. Such considerations are already highlighted within the
+Privacy Pass ecosystem, more discussion can be found at <span>[<a href="#PRIVACY-PASS-ARCH" class="xref">PRIVACY-PASS-ARCH</a>]</span>. Setting a minimum validity
+period limits the ability of a server to rotate keys, but also limits the rate of key rotation.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1213,8 +1219,12 @@ models as the best model depends on differing operational requirements and threa
 <span class="refAuthor">Thomson, M.</span><span class="refAuthor"> and C. A. Wood</span>, <span class="refTitle">"Oblivious HTTP"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-thomson-http-oblivious-01</span>, <time datetime="2021-02-21" class="refDate">21 February 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-thomson-http-oblivious-01.txt">https://datatracker.ietf.org/doc/html/draft-thomson-http-oblivious-01.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="PRIVACY-PASS">[PRIVACY-PASS]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Celi, S.</span><span class="refAuthor">, Davidson, A.</span><span class="refAuthor">, and A. Faz-Hernandez</span>, <span class="refTitle">"Privacy Pass Protocol Specification"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-privacypass-protocol-01</span>, <time datetime="2021-02-22" class="refDate">22 February 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-privacypass-protocol-01.txt">https://datatracker.ietf.org/doc/html/draft-ietf-privacypass-protocol-01.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PRIVACY-PASS-ARCH">[PRIVACY-PASS-ARCH]</dt>
+      <dd>
+<span class="refAuthor">Davidson, A.</span><span class="refAuthor"> and C. A. Wood</span>, <span class="refTitle">"Privacy Pass Architectural Framework"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-privacypass-architecture-01</span>, <time datetime="2021-02-22" class="refDate">22 February 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-privacypass-architecture-01.txt">https://datatracker.ietf.org/doc/html/draft-ietf-privacypass-architecture-01.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1224,6 +1234,14 @@ models as the best model depends on differing operational requirements and threa
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Alex Davidson</span></div>
+<div dir="auto" class="left"><span class="org">LIP Lisboa</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:alex.davidson92@gmail.com" class="email">alex.davidson92@gmail.com</a>
+</div>
+</address>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Martin Thomson</span></div>
 <div dir="auto" class="left"><span class="org">Mozilla</span></div>
