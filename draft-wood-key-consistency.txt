@@ -330,10 +330,10 @@ Table of Contents
               2021, <https://datatracker.ietf.org/doc/html/draft-pauly-
               dprive-oblivious-doh-05.txt>.
 
-   [OHTTP]    Thomson, M. and C. A. Wood, "Oblivious HTTP", Work in
-              Progress, Internet-Draft, draft-thomson-http-oblivious-01,
-              21 February 2021, <https://datatracker.ietf.org/doc/html/
-              draft-thomson-http-oblivious-01.txt>.
+   [OHTTP]    Thomson, M. and C.A. Wood, "Oblivious HTTP", Work in
+              Progress, Internet-Draft, draft-ietf-http-oblivious-
+              latest, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              http-oblivious-latest.txt>.
 
    [PRIVACY-PASS]
               Celi, S., Davidson, A., and A. Faz-Hernandez, "Privacy
