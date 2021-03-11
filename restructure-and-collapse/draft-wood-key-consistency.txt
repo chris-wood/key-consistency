@@ -73,7 +73,7 @@ Table of Contents
    3.  Core Requirements
    4.  Deploying Consistency and Correctness
      4.1.  Direct Discovery
-     4.2.  Single Prox Discovery
+     4.2.  Single Proxy Discovery
      4.3.  Multi-Proxy Discovery
      4.4.  Database Discovery
    5.  Minimum Validity Periods
@@ -208,7 +208,7 @@ Table of Contents
    threat model.  If there is a trusted external log for keys, this may
    be a viable solution.
 
-4.2.  Single Prox Discovery
+4.2.  Single Proxy Discovery
 
    In this model, there exists a proxy that fetches keys from servers on
    behalf of multiple users, as shown below.
