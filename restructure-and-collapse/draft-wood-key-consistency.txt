@@ -341,9 +341,11 @@ Table of Contents
    query it locally, or remotely query the database using a private
    information retrieval (PIR) protocol.  In the case where the database
    is downloaded locally, it should be considered stale and re-fetch
-   periodically.  Downloading the entire database works best if there
-   are a small number of entries, as it does not otherwise impose
-   bandwidth costs on each client that may be impractical.
+   periodically.  The frequency of such updates can likely be infrequent
+   in practice, as frequent key updates or rotations may affect privacy;
+   see Section 5 for details.  Downloading the entire database works
+   best if there are a small number of entries, as it does not otherwise
+   impose bandwidth costs on each client that may be impractical.
 
 5.  Minimum Validity Periods
 
