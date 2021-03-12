@@ -227,7 +227,6 @@ Table of Contents
          x               │
          x               │
          x               │
-         x               │
    ┌──────────┐          │
    │          │          │
    │  Client  ├──────────┘
@@ -327,9 +326,10 @@ Table of Contents
       their view of the log state (gossiping).  However, this type of
       system does not ensure proactive security against malicious
       servers unless log participants actively check log proofs.  This
-      requirement may impede deployment in practice, given that no web
-      browser checks SignedCertificateTimestamps before using (accepting
-      as valid) a corresponding TLS certificate.
+      requirement may impede deployment in practice.  Experience with
+      Certificate Transparency shows that most implementations have
+      chosen not to check SignedCertificateTimestamps before using (that
+      is, accepting as valid) a corresponding TLS certificate.
 
    *  A consensus-based table whose assertions are created by a
       coalition of entities that periodically agree on the correct

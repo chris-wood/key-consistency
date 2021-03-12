@@ -956,8 +956,8 @@ of open problems in this area.<a href="#section-abstract-1" class="pilcrow">¶</
 <nav class="toc"><ul class="compact ulEmpty toc">
 <li class="compact ulEmpty toc" id="section-toc.1-1.1">
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a><a href="#section-toc.1-1.1.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty toc compact">
-<li class="ulEmpty toc compact" id="section-toc.1-1.1.2.1">
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.1.2.1">
                 <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="xref">1.1</a>.  <a href="#name-requirements" class="xref">Requirements</a><a href="#section-toc.1-1.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
@@ -970,17 +970,17 @@ of open problems in this area.<a href="#section-abstract-1" class="pilcrow">¶</
 </li>
           <li class="compact ulEmpty toc" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-deploying-consistency-and-c" class="xref">Deploying Consistency and Correctness</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty toc compact">
-<li class="ulEmpty toc compact" id="section-toc.1-1.4.2.1">
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-direct-discovery" class="xref">Direct Discovery</a><a href="#section-toc.1-1.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.2">
+              <li class="compact ulEmpty toc" id="section-toc.1-1.4.2.2">
                 <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-single-proxy-discovery" class="xref">Single Proxy Discovery</a><a href="#section-toc.1-1.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.3">
+              <li class="compact ulEmpty toc" id="section-toc.1-1.4.2.3">
                 <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="xref">4.3</a>.  <a href="#name-multi-proxy-discovery" class="xref">Multi-Proxy Discovery</a><a href="#section-toc.1-1.4.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.4">
+              <li class="compact ulEmpty toc" id="section-toc.1-1.4.2.4">
                 <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="xref">4.4</a>.  <a href="#name-database-discovery" class="xref">Database Discovery</a><a href="#section-toc.1-1.4.2.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
@@ -996,11 +996,11 @@ of open problems in this area.<a href="#section-abstract-1" class="pilcrow">¶</
 </li>
           <li class="compact ulEmpty toc" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-references" class="xref">References</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty toc compact">
-<li class="ulEmpty toc compact" id="section-toc.1-1.8.2.1">
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.8.2.1">
                 <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="xref">8.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-toc.1-1.8.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty toc compact" id="section-toc.1-1.8.2.2">
+              <li class="compact ulEmpty toc" id="section-toc.1-1.8.2.2">
                 <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="xref">8.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a><a href="#section-toc.1-1.8.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
@@ -1167,7 +1167,6 @@ below.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
       x               │
       x               │
       x               │
-      x               │
 ┌──────────┐          │
 │          │          │
 │  Client  ├──────────┘
@@ -1276,8 +1275,9 @@ audited in such a way that the contents of the log are consistent for all users.
 which depends on this type of KCCS requires the log be audited or users have some other mechanism for
 checking their view of the log state (gossiping). However, this type of system does not ensure proactive
 security against malicious servers unless log participants actively check log proofs. This requirement
-may impede deployment in practice, given that no web browser checks SignedCertificateTimestamps before
-using (accepting as valid) a corresponding TLS certificate.<a href="#section-4.4-4.1" class="pilcrow">¶</a>
+may impede deployment in practice. Experience with Certificate Transparency shows 
+that most implementations have chosen not to check SignedCertificateTimestamps before
+using (that is, accepting as valid) a corresponding TLS certificate.<a href="#section-4.4-4.1" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-4.4-4.2">A consensus-based table whose assertions are created by a coalition of entities that periodically agree on
 the correct binding of server names and key material. In this model the agreement is achieved via a consensus
