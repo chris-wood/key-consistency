@@ -5,12 +5,12 @@
 Network Working Group                                        A. Davidson
 Internet-Draft                                                LIP Lisboa
 Intended status: Informational                                 M. Finkel
-Expires: 12 September 2021                               The Tor Project
+Expires: 13 September 2021                               The Tor Project
                                                               M. Thomson
                                                                  Mozilla
                                                                C.A. Wood
                                                               Cloudflare
-                                                           11 March 2021
+                                                           12 March 2021
 
 
                      Key Consistency and Discovery
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 September 2021.
+   This Internet-Draft will expire on 13 September 2021.
 
 Copyright Notice
 
@@ -350,9 +350,10 @@ Table of Contents
       larger scale deployments, the short-comings of this model may be
       similar to log-based tables.
 
-   *  A Private Information Retrieval (PIR) table.  If the database is
-      small and users query it infrequently, retrieval techniques based
-      on PIR may be viable.
+   If the table is small and queried infrequently, clients can
+   additionally hide their query from the database, which may collude
+   with the server, using Private Information Retrieval (PIR) or similar
+   techniques.
 
 5.  Minimum Validity Periods
 
