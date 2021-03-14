@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-03-11T00:13:44.219448+00:00",
+  "timestamp": "2021-03-14T00:14:37.147102+00:00",
   "repo": "chris-wood/key-consistency",
   "labels": [
     {
@@ -292,6 +292,341 @@
           "createdAt": "2021-02-22T23:05:10Z",
           "updatedAt": "2021-02-22T23:05:10Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTkwOTM3NzIy",
+      "title": "Rearrange and collapse similar discovery mechanisms.",
+      "url": "https://github.com/chris-wood/key-consistency/pull/7",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2021-03-11T15:08:43Z",
+      "updatedAt": "2021-03-12T16:05:58Z",
+      "baseRepository": "chris-wood/key-consistency",
+      "baseRefName": "master",
+      "baseRefOid": "3cdbe68cbf091528764e9255efba3f348191042f",
+      "headRepository": "chris-wood/key-consistency",
+      "headRefName": "caw/restructure-and-collapse",
+      "headRefOid": "ce99e99c87b52eb83e0dc8fa8a2cda307bf507f4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjA5ODgyNjU0",
+          "commit": {
+            "abbreviatedOid": "9a78907"
+          },
+          "author": "alxdavids",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-11T15:22:02Z",
+          "updatedAt": "2021-03-11T15:24:26Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "```suggestion\r\n## Single Proxy Discovery {#proxy-based}\r\n```",
+              "createdAt": "2021-03-11T15:22:02Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            },
+            {
+              "originalPosition": 192,
+              "body": "I'm not sure how this is different from the previous example?",
+              "createdAt": "2021-03-11T15:24:19Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjA5ODkzOTIw",
+          "commit": {
+            "abbreviatedOid": "b265787"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-11T15:31:08Z",
+          "updatedAt": "2021-03-11T15:31:09Z",
+          "comments": [
+            {
+              "originalPosition": 192,
+              "body": "Fair point -- PIR is more about how one *accesses* the table, rather than the contents of the table itself. We could maybe pull PIR out into its own discovery mechanism, then? Not sure.",
+              "createdAt": "2021-03-11T15:31:09Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjEwMTExNjcx",
+          "commit": {
+            "abbreviatedOid": "b265787"
+          },
+          "author": "sysrqb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-11T18:46:21Z",
+          "updatedAt": "2021-03-11T18:59:45Z",
+          "comments": [
+            {
+              "originalPosition": 180,
+              "body": "Small nit: s/achieve/achieved/",
+              "createdAt": "2021-03-11T18:46:21Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            },
+            {
+              "originalPosition": 192,
+              "body": "The original goal was describing how to safely query a database either locally or remotely, where the client does not leak/reveal to a third-party which entry they want from the database. These two paragraphs were focused on the trade-off of the two solutions. However, in both of these designs, an entry includes some guarantee that it was considered \"correct\" by whatever-consensus-protocol was used (maybe multiple signatures, or a threshold signature, or another mechanism entirely).\r\n\r\nWith that being said, \"a third-party database\" could be broken out into a separate discovery mechanism, like \"Indirect Discovery\" :) And I think this would have roughly the same criteria as \"Direct Discovery\".",
+              "createdAt": "2021-03-11T18:55:39Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjEwMTg0MTkx",
+          "commit": {
+            "abbreviatedOid": "b265787"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-11T20:14:19Z",
+          "updatedAt": "2021-03-11T20:14:20Z",
+          "comments": [
+            {
+              "originalPosition": 180,
+              "body": "```suggestion\r\n  the correct binding of server names and key material. In this model the agreement is achieved via a consensus\r\n```",
+              "createdAt": "2021-03-11T20:14:19Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjEwMTg0OTQ0",
+          "commit": {
+            "abbreviatedOid": "b265787"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-11T20:15:20Z",
+          "updatedAt": "2021-03-11T20:15:21Z",
+          "comments": [
+            {
+              "originalPosition": 192,
+              "body": "How is \"indirect discovery\" different from \"database discovery\"? (I like your term *a lot* more!)",
+              "createdAt": "2021-03-11T20:15:20Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjEwMTk5MjM3",
+          "commit": {
+            "abbreviatedOid": "44bd1ca"
+          },
+          "author": "sysrqb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-11T20:33:17Z",
+          "updatedAt": "2021-03-11T20:33:17Z",
+          "comments": [
+            {
+              "originalPosition": 192,
+              "body": "Ah! That's a really good question. I guess I forgot these were all combined under a single \"Database Discovery\" model, and I think they are not different :slightly_smiling_face:\r\n\r\nI guess I could be clearer by saying PIR fits under \"consensus-based\" and \"trusted third-party\"? For consensus-based, we have the current text. For \"third-party\" we have basically \"single-proxy discovery\" as above except the \"proxy\" only provides the key and then the client connects to the destination server through another path (directly or another proxy or however else).",
+              "createdAt": "2021-03-11T20:33:17Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjEwMjAxNDc4",
+          "commit": {
+            "abbreviatedOid": "44bd1ca"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-11T20:36:07Z",
+          "updatedAt": "2021-03-11T20:36:08Z",
+          "comments": [
+            {
+              "originalPosition": 192,
+              "body": "Yeah, that might work. Let me give that a shot.",
+              "createdAt": "2021-03-11T20:36:07Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjEwNDAyOTI0",
+          "commit": {
+            "abbreviatedOid": "d0e69d8"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-12T02:29:12Z",
+          "updatedAt": "2021-03-12T02:29:12Z",
+          "comments": [
+            {
+              "originalPosition": 192,
+              "body": "@sysrqb okay, rewritten somewhat. The PIR text now applies to a generic database, as intended (I think). What do you think?",
+              "createdAt": "2021-03-12T02:29:12Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjEwNDQ0MjA0",
+          "commit": {
+            "abbreviatedOid": "d0e69d8"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-12T04:36:10Z",
+          "updatedAt": "2021-03-12T04:48:43Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "Maybe use an ellipsis (\u2026) here instead?  ",
+              "createdAt": "2021-03-12T04:36:11Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            },
+            {
+              "originalPosition": 51,
+              "body": "```suggestion\r\n\u2502  Client  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba  Proxy   \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u25ba Server  \u2502\r\n```",
+              "createdAt": "2021-03-12T04:36:40Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            },
+            {
+              "originalPosition": 55,
+              "body": "```suggestion\r\n```\r\nThree should do.",
+              "createdAt": "2021-03-12T04:38:11Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            },
+            {
+              "originalPosition": 177,
+              "body": "```suggestion\r\n  may impede deployment in practice. Experience with Certificate Transparency shows \r\n  that most implementations have chosen not to check SignedCertificateTimestamps before\r\n  using (that is, accepting as valid) a corresponding TLS certificate.\r\n```",
+              "createdAt": "2021-03-12T04:42:30Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            },
+            {
+              "originalPosition": 184,
+              "body": "A forward reference to the next section might be OK.  That is, there is no need for the re-retrieval period to be short as new keys cannot be added very quickly.",
+              "createdAt": "2021-03-12T04:45:32Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            },
+            {
+              "originalPosition": 189,
+              "body": "I'm not sure that having a large number of users is a particular problem here based on our experience with CRLite and other such things.  As the update period can be relatively long, the cost of periodic updates should be manageable.  At most, you are talking about key record updates that occur on a similar period to software update checks (assuming reasonable practices there also).",
+              "createdAt": "2021-03-12T04:47:52Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            },
+            {
+              "originalPosition": 193,
+              "body": "You already talked about PIR.  Maybe reconcile the two somehow.",
+              "createdAt": "2021-03-12T04:48:39Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjEwOTI3NzM2",
+          "commit": {
+            "abbreviatedOid": "4097d0d"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-12T16:00:48Z",
+          "updatedAt": "2021-03-12T16:00:48Z",
+          "comments": [
+            {
+              "originalPosition": 189,
+              "body": "\ud83d\udc4d  I removed this bit.",
+              "createdAt": "2021-03-12T16:00:48Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjEwOTI3ODU4",
+          "commit": {
+            "abbreviatedOid": "4097d0d"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-12T16:00:56Z",
+          "updatedAt": "2021-03-12T16:00:56Z",
+          "comments": [
+            {
+              "originalPosition": 193,
+              "body": "Oops, yes, thanks. IETF foggyness.",
+              "createdAt": "2021-03-12T16:00:56Z",
+              "updatedAt": "2021-03-12T16:04:27Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjEwOTMxMTk5",
+          "commit": {
+            "abbreviatedOid": "ce99e99"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-12T16:04:27Z",
+          "updatedAt": "2021-03-12T16:04:28Z",
+          "comments": [
+            {
+              "originalPosition": 184,
+              "body": "Yep, done!",
+              "createdAt": "2021-03-12T16:04:27Z",
+              "updatedAt": "2021-03-12T16:04:28Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjEwOTMyNjA2",
+          "commit": {
+            "abbreviatedOid": "ce99e99"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-03-12T16:05:58Z",
+          "updatedAt": "2021-03-12T16:05:58Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "Eh, I left this as-is for now. We can clean it up later if it's bothersome to others.",
+              "createdAt": "2021-03-12T16:05:58Z",
+              "updatedAt": "2021-03-12T16:05:58Z"
+            }
+          ]
         }
       ]
     }
