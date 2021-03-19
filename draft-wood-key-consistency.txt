@@ -5,12 +5,12 @@
 Network Working Group                                        A. Davidson
 Internet-Draft                                                LIP Lisboa
 Intended status: Informational                                 M. Finkel
-Expires: 26 August 2021                                  The Tor Project
+Expires: 20 September 2021                               The Tor Project
                                                               M. Thomson
                                                                  Mozilla
                                                                C.A. Wood
                                                               Cloudflare
-                                                        22 February 2021
+                                                           19 March 2021
 
 
                      Key Consistency and Discovery
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 August 2021.
+   This Internet-Draft will expire on 20 September 2021.
 
 Copyright Notice
 
@@ -72,17 +72,16 @@ Table of Contents
    2.  Terminology
    3.  Core Requirements
    4.  Deploying Consistency and Correctness
-     4.1.  Server-Provided Key Discovery
-     4.2.  Proxy-Based Key Discovery
-     4.3.  Log-Based Key Discovery
-     4.4.  Anonymous System Key Discovery
-     4.5.  Consensus-based Key Discovery
-     4.6.  Minimum Validity Periods
-   5.  Future Work
-   6.  Security Considerations
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+     4.1.  Direct Discovery
+     4.2.  Single Proxy Discovery
+     4.3.  Multi-Proxy Discovery
+     4.4.  Database Discovery
+   5.  Minimum Validity Periods
+   6.  Future Work
+   7.  Security Considerations
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Authors' Addresses
 
 1.  Introduction
@@ -177,14 +176,24 @@ Table of Contents
    systems and protocols in practice.  In all scenarios, the server
    corresponding to the desired key is considered malicious.
 
-4.1.  Server-Provided Key Discovery
+4.1.  Direct Discovery
 
    In this model, users would directly query servers for their
-   corresponding public key.  The properties of this solution depend on
-   external mechanisms in place to ensure consistency or correctness.
-   Absent any such mechanisms, servers can produce unique keys for users
-   without detection.  External mechanisms to ensure consistency here
-   might include, though are not limited to:
+   corresponding public key, as shown below.
+
+   ┌──────────┐              ┌─────────┐
+   │          │              │         │
+   │  Client  ├──────────────► Server  │
+   │          │              │         │
+   └──────────┘              └─────────┘
+
+                     Figure 1: Direct Discovery Example
+
+   The properties of this solution depend on external mechanisms in
+   place to ensure consistency or correctness.  Absent any such
+   mechanisms, servers can produce unique keys for users without
+   detection.  External mechanism to ensure consistency here might
+   include, though are not limited to:
 
    *  Presenting a signed assertion from a trusted entity that the key
       is correct.
@@ -199,13 +208,37 @@ Table of Contents
    threat model.  If there is a trusted external log for keys, this may
    be a viable solution.
 
-4.2.  Proxy-Based Key Discovery
+4.2.  Single Proxy Discovery
 
    In this model, there exists a proxy that fetches keys from servers on
-   behalf of multiple users.  If this proxy is trusted, then all users
-   which request a key from this server are assured they have a
-   consistent view of the server key.  However, if this proxy is not
-   trusted, operational risks may arise:
+   behalf of multiple users, as shown below.
+
+   ┌──────────┐
+   │          │
+   │  Client  ├──────────┐
+   │          │          │
+   └──────────┘          │
+                         │
+   ┌──────────┐         ┌▼─────────┐      ┌─────────┐
+   │          │         │          │      │         │
+   │  Client  ├─────────►  Proxy   ├──────► Server  │
+   │          │         │          │      │         │
+   └──────────┘         └▲─────────┘      └─────────┘
+         x               │
+         x               │
+         x               │
+   ┌──────────┐          │
+   │          │          │
+   │  Client  ├──────────┘
+   │          │
+   └──────────┘
+
+                  Figure 2: Single Proxy Discovery Example
+
+   If this proxy is trusted, then all users which request a key from
+   this server are assured they have a consistent view of the server
+   key.  However, if this proxy is not trusted, operational risks may
+   arise:
 
    *  The proxy can collude with the server to give per-user keys to
       clients.
@@ -218,59 +251,103 @@ Table of Contents
    Mitigating these risks may require tamper-proof logs as in
    Section 4.1, or via user gossip protocols.
 
-4.3.  Log-Based Key Discovery
+4.3.  Multi-Proxy Discovery
 
-   In this model, servers publish keys in a tamper-proof log similar to
-   that of Certificate Transparency [RFC6962].  Users may then fetch
-   keys directly from the server and subsequently verify their existence
-   in the log.  The log is operated and audited in such a way that the
-   contents of the log are consistent for all users.  Any reliant system
-   which depends on this type of KCCS requires the log be audited or
-   users have some other mechanism for checking their view of the log
-   state (gossiping).  However, this type of system does not ensure
-   proactive security against malicious servers unless log participants
-   actively check log proofs.  This requirement may impede deployment in
-   practice, given that no web browser checks
-   SignedCertificateTimestamps before using (accepting as valid) a
-   corresponding TLS certificate.
+   In this model, users leverage multiple, non-colluding proxies to
+   fetch keys from servers, as shown below.
 
-4.4.  Anonymous System Key Discovery
+                        ┌──────────┐
+                        │          │
+        ┌───────────────►  Proxy   ├───────────┐
+        │               │          │           │
+        │               └──────────┘           │
+        │                                      │
+   ┌────┴─────┐         ┌──────────┐      ┌────▼────┐
+   │          │         │          │      │         │
+   │  Client  ├─────────►  Proxy   ├──────► Server  │
+   │          │         │          │      │         │
+   └─────┬────┘         └──────────┘      └────▲────┘
+         │                    x                │
+         │                    x                │
+         │                    x                │
+         │              ┌──────────┐           │
+         │              │          │           │
+         └──────────────►  Proxy   ├───────────┘
+                        │          │
+                        └──────────┘
 
-   In this model, users leverage an anonymity network such as Tor to
-   fetch keys directly from servers over multiple vantage points.
-   Depending on how clients fetch such keys from servers, it may become
-   more difficult for servers to uniquely target individual users with
-   unique keys without detection.  This is especially true as the number
-   of users of these anonymity networks increases.  However, beyond Tor,
+                  Figure 3: Multi-Proxy Discovery Example
+
+   These proxies are ideally spread across multiple vantage points.
+   Examples of proxies include anonymous systems such as Tor. Depending
+   on how clients fetch such keys from servers, it may become more
+   difficult for servers to uniquely target individual users with unique
+   keys without detection.  This is especially true as the number of
+   users of these anonymity networks increases.  However, beyond Tor,
    there does not exist a special-purpose anonymity network for this
    purpose.
 
-4.5.  Consensus-based Key Discovery
+4.4.  Database Discovery
 
-   In this model, users query a database containing assertions that bind
-   server names and keys.  The assertions provided by this database are
-   created by a coalition of entities that periodically agree on the
-   correct binding of server names and key material.  In this model the
-   agreement is achieve via a consensus protocol, but the specific
-   consensus protocol is dependent on the implementation.  For privacy,
-   users should either download the entire database and query it
-   locally, or remotely query the database using a private information
-   retrieval (PIR) protocol.  In the case where the database is
-   downloaded locally, it should be considered stale and re-fetch
-   periodically, as well.
+   In this model, servers publish keys in an external database and
+   clients fetch keys from the database, as shown below.
 
-   When the entire database is downloaded, this model is appropriate in
-   small scale deployments where the number of bindings in the database
-   is much smaller than the number of users of the reliant system.  In a
-   reliant system with a large user base, this model imposes bandwidth
-   costs on each user that may be impractical.  In larger scale
-   deployments, the short-comings of this model may be similar to
-   Section 4.3.
+   ┌──────────┐
+   │          │
+   │  Client  ├───────────┐
+   │          │           │
+   └──────────┘           │
+                          │
+   ┌──────────┐         ┌─▼────────┐      ┌─────────┐
+   │          │         │          │      │         │
+   │  Client  ├─────────► Database ◄──────┤ Server  │
+   │          │         │          │      │         │
+   └──────────┘         └─▲────────┘      └─────────┘
+        x                 │
+        x                 │
+        x                 │
+   ┌──────────┐           │
+   │          │           │
+   │  Client  ├───────────┘
+   │          │
+   └──────────┘
 
-   If the database is small and users query it infrequently, retrieval
-   techniques based on PIR may be viable.
+                    Figure 4: Database Discovery Example
 
-4.6.  Minimum Validity Periods
+   The database is expected to have a table that asserts mappings
+   between server names and keys.  Examples of such databases are as
+   follows:
+
+   *  An append-only, audited table similar to that of Certificate
+      Transparency [RFC6962].  The log is operated and audited in such a
+      way that the contents of the log are consistent for all users.
+      Any reliant system which depends on this type of KCCS requires the
+      log be audited or users have some other mechanism for checking
+      their view of the log state (gossiping).  However, this type of
+      system does not ensure proactive security against malicious
+      servers unless log participants actively check log proofs.  This
+      requirement may impede deployment in practice.  Experience with
+      Certificate Transparency shows that most implementations have
+      chosen not to check SignedCertificateTimestamps before using (that
+      is, accepting as valid) a corresponding TLS certificate.
+
+   *  A consensus-based table whose assertions are created by a
+      coalition of entities that periodically agree on the correct
+      binding of server names and key material.  In this model the
+      agreement is achieved via a consensus protocol, but the specific
+      consensus protocol is dependent on the implementation.
+
+   For privacy, users should either download the entire database and
+   query it locally, or remotely query the database using a private
+   information retrieval (PIR) protocol.  In the case where the database
+   is downloaded locally, it should be considered stale and re-fetch
+   periodically.  The frequency of such updates can likely be infrequent
+   in practice, as frequent key updates or rotations may affect privacy;
+   see Section 5 for details.  Downloading the entire database works
+   best if there are a small number of entries, as it does not otherwise
+   impose bandwidth costs on each client that may be impractical.
+
+5.  Minimum Validity Periods
 
    In addition to ensuring that there is one key at any time, or a
    limited number keys, any system needs to ensure that a server cannot
@@ -281,9 +358,9 @@ Table of Contents
    validity period limits the ability of a server to rotate keys, but
    also limits the rate of key rotation.
 
-5.  Future Work
+6.  Future Work
 
-   The model in Section 4.4 seems to be the most lightweight and easy-
+   The model in Section 4.3 seems to be the most lightweight and easy-
    to-deploy mechanism for ensuring key consistency and correctness.
    However, it remains unclear if there exists such an anonymity network
    that can scale to the widespread adoption of and requirements of
@@ -293,7 +370,7 @@ Table of Contents
    general purpose system for transparency of opaque keys (or other
    application data).
 
-6.  Security Considerations
+7.  Security Considerations
 
    This document discusses several models that systems might use to
    implement public key discovery while ensuring key consistency and
@@ -301,9 +378,9 @@ Table of Contents
    the best model depends on differing operational requirements and
    threat models.
 
-7.  References
+8.  References
 
-7.1.  Normative References
+8.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -322,13 +399,13 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://datatracker.ietf.org/doc/html/rfc8174>.
 
-7.2.  Informative References
+8.2.  Informative References
 
-   [ODOH]     Kinnear, E., McManus, P., Pauly, T., and C. A. Wood,
-              "Oblivious DNS Over HTTPS", Work in Progress, Internet-
-              Draft, draft-pauly-dprive-oblivious-doh-05, 21 February
-              2021, <https://datatracker.ietf.org/doc/html/draft-pauly-
-              dprive-oblivious-doh-05.txt>.
+   [ODOH]     Kinnear, E., McManus, P., Pauly, T., Verma, T., and C. A.
+              Wood, "Oblivious DNS Over HTTPS", Work in Progress,
+              Internet-Draft, draft-pauly-dprive-oblivious-doh-06, 8
+              March 2021, <https://datatracker.ietf.org/doc/html/draft-
+              pauly-dprive-oblivious-doh-06.txt>.
 
    [OHTTP]    Thomson, M. and C.A. Wood, "Oblivious HTTP", Work in
               Progress, Internet-Draft, draft-ietf-http-oblivious-
