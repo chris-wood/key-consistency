@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-03-18T00:14:09.690737+00:00",
+  "timestamp": "2021-03-21T00:14:55.317363+00:00",
   "repo": "chris-wood/key-consistency",
   "labels": [
     {
@@ -300,24 +300,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NTkwOTM3NzIy",
       "title": "Rearrange and collapse similar discovery mechanisms.",
       "url": "https://github.com/chris-wood/key-consistency/pull/7",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2021-03-11T15:08:43Z",
-      "updatedAt": "2021-03-12T16:05:58Z",
+      "updatedAt": "2021-03-19T16:01:36Z",
       "baseRepository": "chris-wood/key-consistency",
       "baseRefName": "master",
       "baseRefOid": "3cdbe68cbf091528764e9255efba3f348191042f",
       "headRepository": "chris-wood/key-consistency",
       "headRefName": "caw/restructure-and-collapse",
       "headRefOid": "ce99e99c87b52eb83e0dc8fa8a2cda307bf507f4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-03-19T16:01:36Z",
+      "mergedAt": "2021-03-19T16:01:36Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "b62a476cafe13c5342d50e1f9348f3990000e020"
+      },
       "comments": [],
       "reviews": [
         {
@@ -627,6 +629,19 @@
               "updatedAt": "2021-03-12T16:05:58Z"
             }
           ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjE1OTgzMjAy",
+          "commit": {
+            "abbreviatedOid": "ce99e99"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "PIR!",
+          "createdAt": "2021-03-19T00:51:35Z",
+          "updatedAt": "2021-03-19T00:51:35Z",
+          "comments": []
         }
       ]
     }
