@@ -5,12 +5,12 @@
 Network Working Group                                        A. Davidson
 Internet-Draft                                                LIP Lisboa
 Intended status: Informational                                 M. Finkel
-Expires: 20 September 2021                               The Tor Project
+Expires: 23 September 2021                               The Tor Project
                                                               M. Thomson
                                                                  Mozilla
                                                                C.A. Wood
                                                               Cloudflare
-                                                           19 March 2021
+                                                           22 March 2021
 
 
                      Key Consistency and Discovery
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 September 2021.
+   This Internet-Draft will expire on 23 September 2021.
 
 Copyright Notice
 
@@ -181,11 +181,11 @@ Table of Contents
    In this model, users would directly query servers for their
    corresponding public key, as shown below.
 
-   ┌──────────┐              ┌─────────┐
-   │          │              │         │
-   │  Client  ├──────────────► Server  │
-   │          │              │         │
-   └──────────┘              └─────────┘
+   +----------+              +----------+
+   |          |              |          |
+   |  Client  +-------------->  Server  |
+   |          |              |          |
+   +----------+              +----------+
 
                      Figure 1: Direct Discovery Example
 
@@ -213,25 +213,24 @@ Table of Contents
    In this model, there exists a proxy that fetches keys from servers on
    behalf of multiple users, as shown below.
 
-   ┌──────────┐
-   │          │
-   │  Client  ├──────────┐
-   │          │          │
-   └──────────┘          │
-                         │
-   ┌──────────┐         ┌▼─────────┐      ┌─────────┐
-   │          │         │          │      │         │
-   │  Client  ├─────────►  Proxy   ├──────► Server  │
-   │          │         │          │      │         │
-   └──────────┘         └▲─────────┘      └─────────┘
-         x               │
-         x               │
-         x               │
-   ┌──────────┐          │
-   │          │          │
-   │  Client  ├──────────┘
-   │          │
-   └──────────┘
+   +----------+
+   |          |
+   |  Client  +----------+
+   |          |          |
+   +----------+          |
+                         |
+   +----------+         +\/--------+      +----------+
+   |          |         |          |      |          |
+   |  Client  +--------->   Proxy  +------>  Server  |
+   |          |         |          |      |          |
+   +----------+         +^---------+      +----------+
+         x               |
+         x               |
+   +----------+          |
+   |          |          |
+   |  Client  +----------+
+   |          |
+   +----------+
 
                   Figure 2: Single Proxy Discovery Example
 
@@ -256,25 +255,24 @@ Table of Contents
    In this model, users leverage multiple, non-colluding proxies to
    fetch keys from servers, as shown below.
 
-                        ┌──────────┐
-                        │          │
-        ┌───────────────►  Proxy   ├───────────┐
-        │               │          │           │
-        │               └──────────┘           │
-        │                                      │
-   ┌────┴─────┐         ┌──────────┐      ┌────▼────┐
-   │          │         │          │      │         │
-   │  Client  ├─────────►  Proxy   ├──────► Server  │
-   │          │         │          │      │         │
-   └─────┬────┘         └──────────┘      └────▲────┘
-         │                    x                │
-         │                    x                │
-         │                    x                │
-         │              ┌──────────┐           │
-         │              │          │           │
-         └──────────────►  Proxy   ├───────────┘
-                        │          │
-                        └──────────┘
+                        +----------+
+                        |          |
+        +--------------->   Proxy  +-----------+
+        |               |          |           |
+        |               +----------+           |
+        |                                      |
+   +----------+         +----------+      +----\/----+
+   |          │         |          |      |          |
+   |  Client  +--------->   Proxy  +------>  Server  |
+   |          │         |          |      |          |
+   +----------+         +----------+      +----^-----+
+         |                    x                |
+         |                    x                |
+         |              +----------+           |
+         |              |          |           |
+         +-------------->  Proxy   +-----------+
+                        |          |
+                        +----------+
 
                   Figure 3: Multi-Proxy Discovery Example
 
@@ -292,25 +290,24 @@ Table of Contents
    In this model, servers publish keys in an external database and
    clients fetch keys from the database, as shown below.
 
-   ┌──────────┐
-   │          │
-   │  Client  ├───────────┐
-   │          │           │
-   └──────────┘           │
-                          │
-   ┌──────────┐         ┌─▼────────┐      ┌─────────┐
-   │          │         │          │      │         │
-   │  Client  ├─────────► Database ◄──────┤ Server  │
-   │          │         │          │      │         │
-   └──────────┘         └─▲────────┘      └─────────┘
-        x                 │
-        x                 │
-        x                 │
-   ┌──────────┐           │
-   │          │           │
-   │  Client  ├───────────┘
-   │          │
-   └──────────┘
+   +----------+
+   |          |
+   |  Client  +-----------+
+   |          |           |
+   +----------+           |
+                          |
+   +----------+         +----------+      +----------+
+   |          |         |          |      |          |
+   |  Client  +---------> Database <------+  Server  |
+   |          |         |          |      |          |
+   +----------+         +----------+      +----------+
+        x                 |
+        x                 |
+   +----------+           |
+   |          |           |
+   |  Client  +-----------+
+   |          |
+   +----------+
 
                     Figure 4: Database Discovery Example
 
