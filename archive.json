@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-03-21T00:14:55.317363+00:00",
+  "timestamp": "2021-03-23T00:14:14.925532+00:00",
   "repo": "chris-wood/key-consistency",
   "labels": [
     {
@@ -49,7 +49,26 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 9,
+      "id": "MDU6SXNzdWU4MzgxMzA1ODM=",
+      "title": "Rename master->main",
+      "url": "https://github.com/chris-wood/key-consistency/issues/9",
+      "state": "CLOSED",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "chris-wood"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2021-03-22T21:41:49Z",
+      "updatedAt": "2021-03-22T21:48:50Z",
+      "closedAt": "2021-03-22T21:48:50Z",
+      "comments": []
+    }
+  ],
   "pulls": [
     {
       "number": 1,
@@ -644,6 +663,60 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 8,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTk4MjE4OTk3",
+      "title": "Update draft-wood-key-consistency.md",
+      "url": "https://github.com/chris-wood/key-consistency/pull/8",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2021-03-22T17:42:22Z",
+      "updatedAt": "2021-03-22T17:42:26Z",
+      "baseRepository": "chris-wood/key-consistency",
+      "baseRefName": "master",
+      "baseRefOid": "b62a476cafe13c5342d50e1f9348f3990000e020",
+      "headRepository": "chris-wood/key-consistency",
+      "headRefName": "chris-wood-patch-1",
+      "headRefOid": "13a80082d928cfca13ab192c62e69fcff6f30412",
+      "closedAt": "2021-03-22T17:42:26Z",
+      "mergedAt": "2021-03-22T17:42:26Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "9e2fbc1703f137c66299f77268c458f192dcfff5"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 10,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTk4MzgxNTk3",
+      "title": "Add token encryption",
+      "url": "https://github.com/chris-wood/key-consistency/pull/10",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This isn't revolutionary stuff.  It's a little light on detail, but I think that is consistent with the rest of the document.\r\n\r\nConcretely, I imagine that this would be something in the form of `salt || aead(n, k, token)`, where `n` and `k` are derived using something like `kdf(salt, key_config, label, L)`.",
+      "createdAt": "2021-03-22T22:31:18Z",
+      "updatedAt": "2021-03-22T22:31:18Z",
+      "baseRepository": "chris-wood/key-consistency",
+      "baseRefName": "main",
+      "baseRefOid": "9e2fbc1703f137c66299f77268c458f192dcfff5",
+      "headRepository": "martinthomson/key-consistency",
+      "headRefName": "encrypt",
+      "headRefOid": "eb5092516f59182e6b103bcd2df4c5ce6b9bb749",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
