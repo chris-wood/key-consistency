@@ -5,12 +5,12 @@
 Network Working Group                                        A. Davidson
 Internet-Draft                                                LIP Lisboa
 Intended status: Informational                                 M. Finkel
-Expires: 23 September 2021                               The Tor Project
+Expires: 26 September 2021                               The Tor Project
                                                               M. Thomson
                                                                  Mozilla
                                                                C.A. Wood
                                                               Cloudflare
-                                                           22 March 2021
+                                                           25 March 2021
 
 
                      Key Consistency and Discovery
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 September 2021.
+   This Internet-Draft will expire on 26 September 2021.
 
 Copyright Notice
 
@@ -77,11 +77,12 @@ Table of Contents
      4.3.  Multi-Proxy Discovery
      4.4.  Database Discovery
    5.  Minimum Validity Periods
-   6.  Future Work
-   7.  Security Considerations
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+   6.  Key-Based Encryption
+   7.  Future Work
+   8.  Security Considerations
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Authors' Addresses
 
 1.  Introduction
@@ -355,7 +356,31 @@ Table of Contents
    validity period limits the ability of a server to rotate keys, but
    also limits the rate of key rotation.
 
-6.  Future Work
+6.  Key-Based Encryption
+
+   The other schemes described here all attempt to directly limit the
+   number of keys that a client might accept.  However, by changing how
+   keys are used, clients can impose costs on servers that might
+   discourage key diversity.
+
+   Key-based encryption has a client encrypt the information that it
+   sends to a server, such as a token or signed object generated with
+   the server keys.  This encryption uses a key derived from the key
+   configuration and the client does not include any form of key
+   identifier along with the encrypted information.  If the derivation
+   uses a pre-image resistant function (like HKDF), the server can only
+   decrypt the information if it knows the key configuration.  As there
+   is no information the server can use to identify which key was used,
+   it is forced to perform trial decryption if it wants to use multiple
+   keys.
+
+   These costs are only linear in terms of the number of active keys.
+   This doesn't prevent the use of multiple keys, it only makes their
+   use incrementally more expensive.  Trial decryption costs can be
+   increased by choosing a time- or memory-hard function such as
+   [ARGON2] to generate keys.
+
+7.  Future Work
 
    The model in Section 4.3 seems to be the most lightweight and easy-
    to-deploy mechanism for ensuring key consistency and correctness.
@@ -367,7 +392,7 @@ Table of Contents
    general purpose system for transparency of opaque keys (or other
    application data).
 
-7.  Security Considerations
+8.  Security Considerations
 
    This document discusses several models that systems might use to
    implement public key discovery while ensuring key consistency and
@@ -375,9 +400,9 @@ Table of Contents
    the best model depends on differing operational requirements and
    threat models.
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -396,7 +421,14 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://datatracker.ietf.org/doc/html/rfc8174>.
 
-8.2.  Informative References
+9.2.  Informative References
+
+   [ARGON2]   Biryukov, A., Dinu, D., Khovratovich, D., and S.
+              Josefsson, "The memory-hard Argon2 password hash and
+              proof-of-work function", Work in Progress, Internet-Draft,
+              draft-irtf-cfrg-argon2-13, 11 March 2021,
+              <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
+              argon2-13.txt>.
 
    [ODOH]     Kinnear, E., McManus, P., Pauly, T., Verma, T., and C. A.
               Wood, "Oblivious DNS Over HTTPS", Work in Progress,
