@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-03-23T00:14:14.925532+00:00",
+  "timestamp": "2021-03-28T00:05:50.573120+00:00",
   "repo": "chris-wood/key-consistency",
   "labels": [
     {
@@ -697,26 +697,42 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NTk4MzgxNTk3",
       "title": "Add token encryption",
       "url": "https://github.com/chris-wood/key-consistency/pull/10",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This isn't revolutionary stuff.  It's a little light on detail, but I think that is consistent with the rest of the document.\r\n\r\nConcretely, I imagine that this would be something in the form of `salt || aead(n, k, token)`, where `n` and `k` are derived using something like `kdf(salt, key_config, label, L)`.",
       "createdAt": "2021-03-22T22:31:18Z",
-      "updatedAt": "2021-03-22T22:31:18Z",
+      "updatedAt": "2021-03-25T13:20:39Z",
       "baseRepository": "chris-wood/key-consistency",
       "baseRefName": "main",
       "baseRefOid": "9e2fbc1703f137c66299f77268c458f192dcfff5",
       "headRepository": "martinthomson/key-consistency",
       "headRefName": "encrypt",
       "headRefOid": "eb5092516f59182e6b103bcd2df4c5ce6b9bb749",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-03-25T13:20:39Z",
+      "mergedAt": "2021-03-25T13:20:39Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "933be7c86e6b4315bc8cd23b7abfdfff09346ae0"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjIxMTAxMTA0",
+          "commit": {
+            "abbreviatedOid": "eb50925"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-03-25T13:20:35Z",
+          "updatedAt": "2021-03-25T13:20:35Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
